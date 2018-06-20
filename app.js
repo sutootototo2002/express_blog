@@ -28,7 +28,7 @@ app.use('/',require('./router/main'));
   var host = server.address().address;
   var port = server.address().port;
 
-  mongoose.connect('mongodb://localhost:27017/blog',function(err){
+  mongoose.connect('mongodb://120.78.229.228:27017/blog',function(err){
       if(err){
         console.log('数据库连接失败');
       }else{
