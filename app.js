@@ -24,7 +24,7 @@ app.use('/admin',require('./router/admin'));
 app.use('/api',require('./router/api'));
 app.use('/',require('./router/main'));
 
-  var server = app.listen(3000, function () {
+  var server = app.listen(80||3000, function () {
   var host = server.address().address;
   var port = server.address().port;
 
