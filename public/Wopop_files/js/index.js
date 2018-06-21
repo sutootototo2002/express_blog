@@ -60,7 +60,13 @@ $(function(){
     //点击发送短信
     $('#but_checkNum').on('click',function(){
         //通过ajax提交请求
-       
+        var phoneNum = $('#tel').val();
+        if(phoneNum === ''){
+            alert("请输入手机号")
+        }else{
+            myjs.showtime('myform',30);
+        }
+        
         $.ajax({
             type:'post',
             url:'/api/user/sys',
@@ -75,9 +81,11 @@ $(function(){
                  }
                  if(data.code === 0){
 
-                    myjs.showtime('myform',30);
+                   
                     sysNum = data.responseNum;
 
+                 }else{
+                    alert(data.message);
                  }
             }
         })

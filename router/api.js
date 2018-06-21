@@ -43,11 +43,13 @@ router.post('/user/register', function (req, res, next) {
         responseData.code = 1;
         responseData.message = "密码不能为空";
         return res.json(responseData);
+        
     }
     if (phone === "") {
         responseData.code = 1;
         responseData.message = "手机号不能为空";
         return res.json(responseData);
+        
     }
 
     User.findOne({
@@ -93,20 +95,32 @@ router.post('/user/sys',function(req,res,next){
         TemplateParam: '{"code":'+code+'}'
     }).then(function (res) {
         let {Code}=res
+        conosle.log("susususususuCode:"+Code);
         if (Code === 'OK') {
             //处理返回参数
+            console.log("sucess!");
             console.log(res);
             responseData.code = 0;
             responseData.message = "短信发送成功！";
             responseData.responseNum = md5(code);
             return ress.json(responseData);
 
+        }else{
+            console.log("fail!");
+            responseData.code = -1;
+            responseData.message = "请不要频繁发送";
+            return ress.json(responseData);
         }
-    }, function (err) {
-        console.log(err)
+    }).catch(function (error) {//加上catch 
+        console.log("error");
+        console.log(error.data.Code);
+        responseData.code = -1;
+        responseData.message = "请不要频繁发送,请稍后再试！";
+        return ress.json(responseData);
         
+      })
     })
 
-})
+
 
 module.exports = router;
