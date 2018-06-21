@@ -8,7 +8,9 @@
   <link href="../../public/Wopop_files/style_log.css" rel="stylesheet" type="text/css">
   <link rel="stylesheet" type="text/css" href="../../public/Wopop_files/style.css">
   <link rel="stylesheet" type="text/css" href="../../public/Wopop_files/userpanel.css">
+  <script src="../../public/js/myjs/myjs.js"></script>
   <script src="../../public/js/jquery.min.js"></script>
+  <script src="http://cdn.bootcss.com/blueimp-md5/1.1.0/js/md5.min.js"></script> 
 
 </head>
 
@@ -26,6 +28,7 @@
           <input type="text" id="username1" name="username1" class="txt_input txt_input2" onfocus="if (value ==&#39;用户名称&#39;){value =&#39;&#39;}"
             onblur="if (value ==&#39;&#39;){value=&#39;Your name&#39;}" value="">
         </label>
+        <label>
         <h2>密码</h2>
         <label>
           <input type="password" name="textfield2" id="password1" name="password1" class="txt_input" onfocus="if (value ==&#39;******&#39;){value =&#39;&#39;}"
@@ -77,15 +80,15 @@
      
       <div class="login_padding" id="login_model">
           <h2 style="text-align: center;font-size:16px;">用户注册</h2>
-        <h2>用户名</h2>
+          <form name="myform">
         <label>
-          <input type="text" id="username" name="username" class="txt_input txt_input2" onfocus="if (value ==&#39;Your name&#39;){value =&#39;&#39;}"
-            onblur="if (value ==&#39;&#39;){value=&#39;Your name&#39;}" value="">
+          <input type="text" id="username" name="username" class="txt_input txt_input2" placeholder="用户名">
         </label>
-        <h2>密码</h2>
+        <input type="text" id="tel" name="tel"  class="txt_input txt_input2" placeholder="手机号" >
+        <p class='btn_Box'><input type="text" id="yz_num" name="yz_num"  class="txt_input txt_input3" placeholder="验证码" ><input type='button' id='but_checkNum' class='checkNum' value="点击获取验证码" name="phone"></p>
+      </label>
         <label>
-          <input type="password" name="textfield2" id="password" name="password" class="txt_input" onfocus="if (value ==&#39;******&#39;){value =&#39;&#39;}"
-            onblur="if (value ==&#39;&#39;){value=&#39;******&#39;}" value="">
+          <input type="password" name="textfield2" id="password" name="password" class="txt_input"  placeholder="*******">
         </label>
 
         <p class="forgot">
@@ -97,8 +100,9 @@
             <!-- <label for="checkbox">记住我</label> -->
           <!-- </div> -->
           <label>
-            <input type="submit" class="sub_button" name="button" id="button_reg" value="注册" style="opacity: 0.7;">
+            <input type="button" class="sub_button" name="button" id="button_reg" value="注册" style="opacity: 0.7;">
           </label>
+        </form>
         </div>
       </div>
 
