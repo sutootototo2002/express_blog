@@ -51,7 +51,7 @@ router.post('/user/register', function (req, res, next) {
     }
 
     User.findOne({
-        username:username
+        phone:phone
     }).then(function(userInfo){
         console.log(userInfo);
         if(userInfo){
