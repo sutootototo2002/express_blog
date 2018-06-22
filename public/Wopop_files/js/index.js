@@ -71,6 +71,18 @@ $(function(){
             }
         })
     });
+    //退出
+    $('#logout').on('click',function(){
+        $.ajax({
+            url:'/api/user/logout',
+            success:function(result){
+               if(!result.code){
+                alert(result.message);
+                 window.location.reload();
+               }
+            }
+        })
+    });
     //点击发送短信
     $('#but_checkNum').on('click',function(){
         //通过ajax提交请求

@@ -122,6 +122,12 @@ router.post('/user/sys',function(req,res,next){
         
       })
     })
+//腿粗
+    router.get('/user/logout', function (req, res) {
+        req.cookies.set('userInfo',null);
+        responseData.message='退出成功！';
+        res.json(responseData);
+    })
 
     router.post('/user/login', function (req, res, next) {
 
