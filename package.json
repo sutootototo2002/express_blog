@@ -11,6 +11,7 @@
   "dependencies": {
     "@alicloud/sms-sdk": "^1.1.1",
     "body-parser": "^1.18.3",
+    "cookies": "^0.7.1",
     "express": "^4.16.3",
     "md5-node": "^1.0.1",
     "mongoose": "^5.1.5",

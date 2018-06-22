@@ -4,6 +4,20 @@ app.use('/public',express.static(__dirname+'/public'));
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({extended:true}));
+var cookies = require('cookies');
+
+app.use(function(req,res,next){
+  req.cookies = new cookies(req,res);
+  req.userInfo = {};
+  if(req.cookies.get('userInfo')){
+     try{
+       req.userInfo = JSON.parse(req.cookies.get('userInfo'));
+     }catch(e){
+
+     }
+  }
+  next();
+})
 
 
 

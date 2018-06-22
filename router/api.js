@@ -8,6 +8,8 @@ var express = require('express');
 var router = express.Router();
 var User = require('../models/User');
 var md5 = require('md5-node');
+
+
 const SMSClient = require('@alicloud/sms-sdk');
 
 // ACCESS_KEY_ID/ACCESS_KEY_SECRET 根据实际申请的账号信息进行替换
@@ -119,6 +121,59 @@ router.post('/user/sys',function(req,res,next){
         return ress.json(responseData);
         
       })
+    })
+
+    router.post('/user/login', function (req, res, next) {
+
+        console.log(req.body);
+        //注册逻辑 用户名是否为空
+        var username = req.body.username;
+        var password = req.body.password;
+        if (username === "") {
+            responseData.code = -1;
+            responseData.message = "用户名不能为空";
+            return res.json(responseData);
+        }
+        if (password === "") {
+            responseData.code = -1;
+            responseData.message = "密码不能为空";
+            return res.json(responseData);
+            
+        }
+        // if (phone === "") {
+        //     responseData.code = -1;
+        //     responseData.message = "手机号不能为空";
+        //     return res.json(responseData);
+            
+        // }
+    
+        User.findOne({
+            username:username,
+            password:md5(password)
+        }).then(function(userInfo){
+            console.log(userInfo);
+            if(!userInfo){
+              responseData.code = -1;
+               responseData.message = "该用户不存在！";
+               return res.json(responseData);
+            }else{
+                responseData.code = 0;
+               responseData.message = "登录成功";
+               responseData.userInfo = {
+                   _id:userInfo._id,
+                   username:userInfo.username
+               }
+               req.cookies.set('userInfo',JSON.stringify({
+                   _id:userInfo._id,
+                   username:userInfo.username
+               }));
+               return res.json(responseData);
+            }
+            
+        }).catch(function (error) {//加上catch 
+            console.log(error);
+            return;
+          })
     })
 
 
