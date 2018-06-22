@@ -36,11 +36,12 @@ $(function(){
                  if(data.code === 0){
                      alert("注册成功："+data.message);
                      sysNum="";
-                     var $loginBox = $('#login_box');
-                     // alert($loginBox);
-                      var $regBox = $('#reg_box');
-                      $regBox.hide();
-                      $loginBox.show();
+                    //  var $loginBox = $('#login_box');
+                    //  // alert($loginBox);
+                    //   var $regBox = $('#reg_box');
+                    //   $regBox.hide();
+                    //   $loginBox.show();
+                    window.location.reload();
 
                  }else{
                      alert("注册失败："+data.message);

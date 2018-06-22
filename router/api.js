@@ -57,6 +57,7 @@ router.post('/user/register', function (req, res, next) {
     User.findOne({
         username:username
     }).then(function(userInfo){
+        console.log("userInfo-111");
         console.log(userInfo);
         if(userInfo){
             responseData.code = 4;
@@ -68,12 +69,19 @@ router.post('/user/register', function (req, res, next) {
             password:md5(password),
             phone:phone
         });
-         user.save();
-    }).then(function(newUserInfo){
-        console.log(newUserInfo);
+         return user.save();
+         
+    }).then(function(userInfo){
+        console.log("userInfo-222");
+        console.log("s:"+userInfo);
         responseData.code = 0;
         responseData.message = "注册成功";
+        req.cookies.set('userInfo',JSON.stringify({
+            _id:userInfo._id,
+            username:userInfo.username
+        }));
         return res.json(responseData);
+       
     }).catch(function (error) {//加上catch 
         console.log(error);
         return;
