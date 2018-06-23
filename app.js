@@ -6,14 +6,23 @@ var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({extended:true}));
 var cookies = require('cookies');
 
+var User = require('./models/User');
+
+
 app.use(function(req,res,next){
   req.cookies = new cookies(req,res);
   req.userInfo = {};
   if(req.cookies.get('userInfo')){
      try{
        req.userInfo = JSON.parse(req.cookies.get('userInfo'));
+       User.findById(req.userInfo._id).then(function(userInfo){
+             req.userInfo.isAdmin = Boolean(userInfo.isAdmin);
+             next();
+       })
+       //是否是管理员
+       //获取当前登陆用户是否是管理员
      }catch(e){
-
+            next();
      }
   }
   next();

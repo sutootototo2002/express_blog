@@ -107,9 +107,11 @@ $(function(){
                  
                  if(data.code === 1){
                      alert('手机号不能为空！');
+                     return;
                  }
+                 myjs.showtime('myform',30);
                  if(data.code === 0){
-                    myjs.showtime('myform',30);
+                   
                     sysNum = data.responseNum;
 
                  }else{

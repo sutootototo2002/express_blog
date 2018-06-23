@@ -78,7 +78,8 @@ router.post('/user/register', function (req, res, next) {
         responseData.message = "注册成功";
         req.cookies.set('userInfo',JSON.stringify({
             _id:userInfo._id,
-            username:userInfo.username
+            username:userInfo.username,
+            isAdmin:isAdmin
         }));
         return res.json(responseData);
        
@@ -105,11 +106,11 @@ router.post('/user/sys',function(req,res,next){
         TemplateParam: '{"code":'+code+'}'
     }).then(function (res) {
         let {Code}=res
-        conosle.log("susususususuCode:"+Code);
+        //conosle.log("susususususuCode:"+Code);
         if (Code === 'OK') {
             //处理返回参数
-            console.log("sucess!");
-            console.log(res);
+            //console.log("sucess!");
+            //console.log(res);
             responseData.code = 0;
             responseData.message = "短信发送成功！";
             responseData.responseNum = md5(code);
@@ -175,11 +176,13 @@ router.post('/user/sys',function(req,res,next){
                responseData.message = "登录成功";
                responseData.userInfo = {
                    _id:userInfo._id,
-                   username:userInfo.username
+                   username:userInfo.username,
+                   isAdmin:userInfo.isAdmin
                }
                req.cookies.set('userInfo',JSON.stringify({
                    _id:userInfo._id,
-                   username:userInfo.username
+                   username:userInfo.username,
+                   isAdmin:userInfo.isAdmin
                }));
                return res.json(responseData);
             }
