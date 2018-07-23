@@ -2,12 +2,15 @@ var express = require('express');
 var app = express();
 app.use('/public',express.static(__dirname+'/public'));
 var mongoose = require('mongoose');
+var bluebird = require('bluebird');
+
 var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({extended:true}));
 var cookies = require('cookies');
 
 var User = require('./models/User');
-
+//注意下面这句
+mongoose.Promise=bluebird;
 
 app.use(function(req,res,next){
   req.cookies = new cookies(req,res);
@@ -47,18 +50,21 @@ app.use('/admin',require('./router/admin'));
 app.use('/api',require('./router/api'));
 app.use('/',require('./router/main'));
 
-  var server = app.listen(80||3000, function () {
+  var server = app.listen(80, function () {
   var host = server.address().address;
   var port = server.address().port;
 
-  mongoose.connect('mongodb://120.78.229.228:27017/blog',function(err){
-      if(err){
-        console.log('数据库连接失败');
-      }else{
-        console.log('数据库连接成功');
-      }
+
+
+
+  // mongoose.connect('mongodb://120.78.229.228:27017/blog',function(err){
+  //     if(err){
+  //       console.log('数据库连接失败');
+  //     }else{
+  //       console.log('数据库连接成功');
+  //     }
      
-  });
+  // });
 
   console.log('Example app listening at http://%s:%s', host, port);
 });

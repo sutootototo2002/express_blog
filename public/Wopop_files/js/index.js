@@ -1,19 +1,19 @@
-$(function(){
+$(function () {
     var $loginBox = $('#login_box');
-   // alert($loginBox);
+    // alert($loginBox);
     var $regBox = $('#reg_box');
-   $('#iforget1').on('click',function(){
+    $('#iforget1').on('click', function () {
         $loginBox.hide();
         $regBox.show();
     })
-    $('#reg_box #iforget2').on('click',function(){
+    $('#reg_box #iforget2').on('click', function () {
         $regBox.hide();
         $loginBox.show();
-       
+
     })
     //用户注册
     var sysNum = "";
-    $('#button_reg').on('click',function(){
+    $('#button_reg').on('click', function () {
         //通过ajax提交请求
         // var sys =md5($('#yz_num').val());
         // if(sys === sysNum){
@@ -23,19 +23,19 @@ $(function(){
         //     return;
         // }
         $.ajax({
-            type:'post',
-            url:'/api/user/register',
-            data:{
-                username:$('#username').val(),
-                password:$('#password').val(),
-                phone:$('#tel').val()
+            type: 'post',
+            url: '/api/user/register',
+            data: {
+                username: $('#username').val(),
+                password: $('#password').val(),
+                phone: $('#tel').val()
             },
-            dataType:'json',
-            success:function(data){
-                 console.log(data);
-                 if(data.code === 0){
-                     alert("注册成功："+data.message);
-                     sysNum="";
+            dataType: 'json',
+            success: function (data) {
+                console.log(data);
+                if (data.code === 0) {
+                    alert("注册成功：" + data.message);
+                    sysNum = "";
                     //  var $loginBox = $('#login_box');
                     //  // alert($loginBox);
                     //   var $regBox = $('#reg_box');
@@ -43,80 +43,80 @@ $(function(){
                     //   $loginBox.show();
                     window.location.reload();
 
-                 }else{
-                     alert("注册失败："+data.message);
-                     sysNum="";
-                 }
+                } else {
+                    alert("注册失败：" + data.message);
+                    sysNum = "";
+                }
             }
         })
     })
     //用户登录
-    $('#login_button').on('click',function(){
+    $('#login_button').on('click', function () {
         //通过ajax提交请求
         $.ajax({
-            type:'post',
-            url:'/api/user/login',
-            data:{
-                username:$('#username1').val(),
-                password:$('#password1').val()
+            type: 'post',
+            url: '/api/user/login',
+            data: {
+                username: $('#username1').val(),
+                password: $('#password1').val()
             },
-            dataType:'json',
-            success:function(data){
-                 console.log(data);
-                 if(data.code === -1){
+            dataType: 'json',
+            success: function (data) {
+                console.log(data);
+                if (data.code === -1) {
                     alert(data.message);
-                 }
-                 if(data.code ===0){
-                     window.location.reload();
-                 }
+                }
+                if (data.code === 0) {
+                    window.location.reload();
+                }
             }
         })
     });
     //退出
-    $('#logout').on('click',function(){
+    $('#logout').on('click', function () {
         $.ajax({
-            url:'/api/user/logout',
-            success:function(result){
-               if(!result.code){
-                alert(result.message);
-                 window.location.reload();
-               }
+            url: '/api/user/logout',
+            success: function (result) {
+                if (!result.code) {
+                    alert(result.message);
+                    window.location.reload();
+                }
             }
         })
     });
     //点击发送短信
-    $('#but_checkNum').on('click',function(){
+    $('#but_checkNum').on('click', function () {
         //通过ajax提交请求
         var phoneNum = $('#tel').val();
-        if(phoneNum === ''){
+        if (phoneNum === '') {
             alert("请输入手机号");
             return;
-        }else{
-            
+        } else {
+
         }
-        
+
         $.ajax({
-            type:'post',
-            url:'/api/user/sys',
-            data:{
-                phoneNum:$('#tel').val()
+            type: 'post',
+            url: '/api/user/sys',
+            data: {
+                phoneNum: $('#tel').val()
             },
-            dataType:'json',
-            success:function(data){
-                 console.log(data);
-                 
-                 if(data.code === 1){
-                     alert('手机号不能为空！');
-                     return;
-                 }
-                 myjs.showtime('myform',30);
-                 if(data.code === 0){
-                   
+            dataType: 'json',
+            success: function (data) {
+                console.log(data);
+
+                if (data.code === 1) {
+                    alert('手机号不能为空！');
+                    return;
+                }
+                myjs.showtime('myform', 30);
+                if (data.code === 0) {
+
                     sysNum = data.responseNum;
 
-                 }else{
+                } else {
                     alert(data.message);
-                 }
+                }
             }
         })
     });

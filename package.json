@@ -16,5 +16,9 @@
     "md5-node": "^1.0.1",
     "mongoose": "^5.1.5",
     "swig": "^1.4.2"
+  },
+  "devDependencies": {
+    "bluebird": "^3.5.1",
+    "cookies": "^0.7.1"
   }
 }
